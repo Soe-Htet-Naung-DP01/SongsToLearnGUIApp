@@ -1,0 +1,59 @@
+BoxLayout:
+    orientation: 'horizontal'
+    BoxLayout:
+    #separate into 2 main groups for the layout
+        orientation: 'vertical'
+        size_hint_x: 0.25
+
+        Label:
+        #this button will sort the way the songs are displayed
+            text: "Sort by: "
+
+        Spinner:
+            id: sorter_spinner
+            text: "Choose sorting"
+            values: ("Learned", "Title", "Artist","Year")
+            on_text: if sorter_spinner.text == "Learned": app.sort_learned()
+            on_text: if sorter_spinner.text == "Title": app.sort_title()
+            on_text: if sorter_spinner.text == "Artist": app.sort_artist()
+            on_text: if sorter_spinner.text == "Year": app.sort_year()
+        Label:
+            text: "Add new song..."
+
+        Label:
+            text: "Title:"
+        TextInput:
+            id: input_title
+
+        Label:
+            text: "Artist:"
+        TextInput:
+            id: input_artist
+
+        Label:
+            text: "Year"
+        TextInput:
+            id: input_year
+
+        Button:
+            text:"Add song"
+            on_press: app.add_song()
+            #save these details into a list on_press:
+        Button:
+            text: "Clear"
+            on_press: app.clear_input()
+    BoxLayout:
+        orientation: 'vertical'
+
+        Label:
+            size_hint_y: 0.1
+            text: app.learning_status_text
+            id: sort_method_label_output
+
+        BoxLayout:
+            size_hint_y: 1
+            id: entries_box
+            orientation: "vertical"
+        Label:
+            size_hint_y: 0.1
+            text: app.status_text
